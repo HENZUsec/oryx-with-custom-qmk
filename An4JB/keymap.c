@@ -1,6 +1,7 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 #include "i18n.h"
+#include "socd_cleaner.h"
 #define MOON_LED_LEVEL LED_LEVEL
 #ifndef ZSA_SAFE_RANGE
 #define ZSA_SAFE_RANGE SAFE_RANGE
@@ -45,6 +46,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 
+// SOCD / Last Input Wins for WASD
+socd_cleaner_t socd_opposing_pairs[] = {
+  {{KC_W, KC_S}, SOCD_CLEANER_LAST},
+  {{KC_A, KC_D}, SOCD_CLEANER_LAST},
+};
 
 
 
@@ -88,9 +94,3 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
-
-// SOCD / Last Input Wins for WASD
-socd_cleaner_t socd_opposing_pairs[] = {
-  {{KC_W, KC_S}, SOCD_CLEANER_LAST},
-  {{KC_A, KC_D}, SOCD_CLEANER_LAST},
-};
